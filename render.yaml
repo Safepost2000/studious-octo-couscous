@@ -1,0 +1,13 @@
+services:
+  - type: worker # Use 'worker' for background tasks like polling bots
+    name: gemini-telegram-bot
+    env: python # Specify the environment (Python)
+    buildCommand: "pip install -r requirements.txt" # Command to install dependencies
+    startCommand: "python bot.py" # Command to start the bot script
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        fromSecret: true # Mark as secret, value set in Render dashboard
+      - key: GOOGLE_API_KEY
+        fromSecret: true # Mark as secret, value set in Render dashboard
+      - key: PYTHON_VERSION # Optional: Specify Python version if needed
+        value: 3.11 # Or your preferred version supported by Render
